@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="flashcards">
+<head>
+<script type="text/javascript" src="scripts/trivia_mc.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css"/>
+<script type="text/javascript" src="angular/angular.min.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
+</head>
+<body ng-controller="CardController as flashcards">
+	<div class="container">
+		<h3><i>Topic: {{flashcards.card.topic}} : Question {{flashcards.card.sequence}}</i></h3>
+		<h2> {{flashcards.card.Question}} </h2>
+		<p><h3>
+		<input type="radio" ng-model="answer" value="A"> {{flashcards.card.choice_a}} <br/>
+		<input type="radio" ng-model="answer" value="B"> {{flashcards.card.choice_b}} <br/>
+		<input type="radio" ng-model="answer" value="C"> {{flashcards.card.choice_c}} <br/>
+		<input type="radio" ng-model="answer" value="D"> {{flashcards.card.choice_d}} <br/>
+	</h3>
+	</p>
+	<p>
+ 		   <h1 ng-if="answer == flashcards.card.correct_answer" class="animate-if text-success">Correct!</h1>
+		   <h1 ng-if="answer != null && answer != flashcards.card.correct_answer" class="animate-if text-error">Incorrect Answer</h1>
+	</p>
+	<p>
+		<button ng-click="flashcards.get_previous_card();answer=null">
+		  < Previous Question
+		</button>
+		
+		<button ng-click="flashcards.get_next_card();answer=null">
+		  Next Question >
+		</button>
+	</p>
+	<p class="muted">
+		(Question {{flashcards.card.sequence}} of {{flashcards.deck.length}} total questions)
+	</p>
+	</div>
+	<script>
+		 angular.module('answers', [])
+		    .controller('AnswerController', ['$scope', function($scope) {
+		      $scope.answer = '';
+		    }]);
+	</script>
+</body>
+</html>
