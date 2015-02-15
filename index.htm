@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="flashcards">
 <head>
-<script type="text/javascript" src="scripts/trivia_mc.js"></script>
+<script type="text/javascript" src="app/data/trivia_mc.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css"/>
 <script type="text/javascript" src="angular/angular.min.js"></script>
-<script type="text/javascript" src="scripts/app.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
 </head>
 <body ng-controller="CardController as flashcards">
 	<div class="container">
-		<h3><i>Topic: {{flashcards.card.topic}} : Question {{flashcards.card.sequence}}</i></h3>
+		<h3><i>Topic: {{flashcards.card.topic}}</i></h3>
 		<h2> {{flashcards.card.Question}} </h2>
 		<p><h3>
 		<input type="radio" ng-model="answer" value="A"> {{flashcards.card.choice_a}} <br/>
@@ -32,7 +32,11 @@
 		</button>
 	</p>
 	<p class="muted">
-		(Question {{flashcards.card.sequence}} of {{flashcards.deck.length}} total questions)
+		(Question {{flashcards.active_card+1}} of {{flashcards.deck.length}} total questions)
+	</p>
+	<p>
+
+		<button ng-click="flashcards.fisher_yates_shuffle();answer=null;flashcards.get_first_card();">Shuffle the deck</button>
 	</p>
 	</div>
 	<script>
